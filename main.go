@@ -3,13 +3,18 @@ package main
 import (
 	"Tiomon/Pendencias/config"
 	"Tiomon/Pendencias/routes"
-	"fmt"
+)
+
+var (
+	logger *config.Logger
 )
 
 func main() {
+	logger = config.GetLogger("main")
 	err := config.Init()
 	if err != nil {
-		fmt.Println(err.Error())
+		logger.Errorf("config init error: %v", err)
+		return
 	}
 	routes.HandleRequests()
 
