@@ -6,11 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func HandleRequests() {
-	r := gin.Default()
-	r.Use(middleware.ContentTypeMiddleware)
-	r.HandleFunc("/", handler.Home)
-	r.NoRoute(handler.RoutesNotFound)
+func InicializerRoutes(router *gin.Engine) {
+	v1 := router.Group("/api/v1")
+	{
+		v1.POST("/pendencias", handler.CreatePendingHandler)
+		v1.GET("/pendencias", handler.ShowPedingHandler)
+		v1.PUT("/pendencias", handler.UpdatePendingHandler)
+		v1.DELETE("/pendencias", handler.DeletePendingHandler)
+		v1.GET("/pendencias", handler.ListPendingHandler)
 
-	r.Run()
+	}
 }

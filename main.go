@@ -16,6 +16,6 @@ func main() {
 		logger.Errorf("config init error: %v", err)
 		return
 	}
-	routes.HandleRequests()
+	routes.Initialize()
 
 }
